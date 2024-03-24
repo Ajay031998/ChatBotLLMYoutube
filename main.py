@@ -3,7 +3,7 @@ import openai
 import requests
 
 # OpenAI API key
-openai.api_key = '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'
+openai.api_key = st.secrets["openaikey"]
 
 from dataclasses import dataclass
 @dataclass
@@ -35,7 +35,7 @@ def extract_text_from_image(image_path):
 def get_youtube_links(query):
     # Make a request to YouTube Data API to search for videos related to the query
     # Replace 'YOUR_API_KEY' with your actual YouTube Data API key
-    youtube_api_key = 'AIzaSyD-7zL08bz8e42n4lrND3fEvGBOrGpQ58g'
+    youtube_api_key = st.secrets["youtubekey"]
     search_url = f'https://www.googleapis.com/youtube/v3/search?key={youtube_api_key}&part=snippet&type=video&q={query}'
     response = requests.get(search_url)
     data = response.json()
