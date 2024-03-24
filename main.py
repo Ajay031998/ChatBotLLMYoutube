@@ -3,7 +3,7 @@ import openai
 import requests
 
 # OpenAI API key
-openai.api_key = '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'
+openai.api_key = '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'
 
 from dataclasses import dataclass
 @dataclass
