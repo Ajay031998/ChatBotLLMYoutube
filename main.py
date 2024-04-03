@@ -1,20 +1,19 @@
 import streamlit as st
 import openai
 import requests
+from dataclasses import dataclass
+import cv2
+import pytesseract
+import os
 
 # OpenAI API key
 openai.api_key = st.secrets["openaikey"]
 
-from dataclasses import dataclass
 @dataclass
 class Message:
     actor: str
     payload: str
 
-import cv2
-import pytesseract
-
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 # Preprocess the image and extract text using OCR
 def extract_text_from_image(image_path):
     # Read the image
@@ -68,7 +67,6 @@ def get_and_append_to_list(message):
     st.session_state['past_messages'].append(message)
     return st.session_state['past_messages']
 
-#--------------------
 USER = "user"
 ASSISTANT = "ai"
 MESSAGES = "messages"
@@ -76,7 +74,6 @@ def initialize_session_state():
     if MESSAGES not in st.session_state:
         st.session_state[MESSAGES] = [Message(actor=ASSISTANT, payload="Hi! How can I help you?")]
 
-import os
 def save_uploaded_file(uploaded_file, filename):
     """Saves a file uploaded through Streamlit to the specified path."""
     with open(os.path.join("uploads", filename), "wb") as f:
